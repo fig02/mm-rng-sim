@@ -9,16 +9,19 @@ char bomberCode[5];
 unsigned int sRandInt;
 unsigned int sRandFloat;
 
+// this function is lifted almost verbatim from mm decomp 
 float Rand_ZeroOne(void) {
     sRandInt = (sRandInt * 1664525) + 1013904223;
     sRandFloat = ((sRandInt >> 9) | 0x3F800000);
     return *((float*)&sRandFloat) - 1.0f;
 }
 
+// this function is lifted almost verbatim from mm decomp 
 short Rand_S16Offset(short base, short range) {
     return (short)(Rand_ZeroOne() * range) + base;
 }
 
+// this function is lifted almost verbatim from mm decomp 
 void Sram_GenerateRandomSaveFields() {
     lotteryCodes[0][0] = Rand_S16Offset(0, 10);
     lotteryCodes[0][1] = Rand_S16Offset(0, 10);
@@ -118,7 +121,7 @@ void main() {
                     lotteryCodes[1][0], lotteryCodes[1][1], lotteryCodes[1][2],
                     lotteryCodes[2][0], lotteryCodes[2][1], lotteryCodes[2][2]);
 
-        printf("next seed: %8X\n", sRandInt);
+        printf("   next seed: %8X\n", sRandInt);
         printf("\n");
     }
 
